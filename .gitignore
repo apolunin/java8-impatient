@@ -1,0 +1,48 @@
+# /
+/.classpath
+/.project
+/.settings
+/target
+/.pmd
+*dependency-reduced-pom.xml
+
+#java files to ignore
+*.class
+*target/
+
+#lua files to ignore
+*.rock
+
+## svn files
+*.svn/
+
+## Eclipse files
+.project
+.metadata
+.classpath
+.settings/
+.buildpath
+*.pmd
+.recommenders/**
+
+## Idea Files
+/.idea
+*.iml
+
+## Jmeter
+*.jtl
+
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.log
+*.log.*
+*.tlog
+
+## jEnv files
+.java-version
+
