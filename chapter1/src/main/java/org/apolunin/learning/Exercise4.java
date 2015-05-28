@@ -4,9 +4,15 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-/**
+/*
+ * ###################################################################################################
+ * Task description
+ * ###################################################################################################
+ *
  * Given an array of File objects, sort it so that the directories come before the files,
  * and within each group, elements are sorted by path name. Use a lambda expression, not a Comparator.
+ *
+ * ###################################################################################################
  */
 public class Exercise4 {
     public static void main(String[] args) {
