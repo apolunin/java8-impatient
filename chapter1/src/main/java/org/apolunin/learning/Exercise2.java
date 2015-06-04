@@ -32,7 +32,7 @@ public class Exercise2 {
             return;
         }
 
-        final List<File> directories1 = Arrays.asList(directory.listFiles(file -> file.isDirectory()));
+        final List<File> directories1 = Arrays.asList(directory.listFiles(File::isDirectory));
         System.out.println("########################################");
         System.out.println("find directories using lambda expression");
         System.out.println("########################################");
