@@ -15,7 +15,7 @@ import java.util.List;
  * ###################################################################################################
  */
 public class Exercise4 {
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         final String propertyName = "directory.path";
         final String path = System.getProperty(propertyName);
 

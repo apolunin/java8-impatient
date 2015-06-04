@@ -19,7 +19,7 @@ package org.apolunin.learning;
  * #################################################################################################################
  */
 public class Exercise6 {
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         final Thread thread = new Thread(uncheck(() -> {
             System.out.println("A message from the second thread");
             Thread.sleep(1000);
