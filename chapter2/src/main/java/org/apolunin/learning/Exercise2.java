@@ -6,9 +6,15 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static java.util.Collections.nCopies;
 
-/**
+/*
+ * ################################################################################
+ * Task description
+ * ################################################################################
+ *
  * Verify that asking for the first five long words does not call the filter method
  * once the fifth long word has been found. Simply log each method call.
+ *
+ * ################################################################################
  */
 public class Exercise2 {
     public static void main(final String[] args) {

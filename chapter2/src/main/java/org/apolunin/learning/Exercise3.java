@@ -5,10 +5,16 @@ import java.util.List;
 
 import static java.util.Collections.nCopies;
 
-/**
+/*
+ * ##########################################################################################
+ * Task description
+ * ##########################################################################################
+ *
  * Measure the difference when counting long words with a parallelStream instead of a stream.
  * Call System.currentTimeMillis before and after the call, and print the difference.
  * Switch to a larger document (such as War and Peace) if you have a fast computer.
+ *
+ * ##########################################################################################
  */
 public class Exercise3 {
     public static void main(final String[] args) {
