@@ -14,10 +14,10 @@ import static java.util.Collections.nCopies;
  */
 public class Exercise1 {
     public static void main(final String[] args) throws InterruptedException {
-        final int wordLength = 12;
+        final int WORD_LENGTH = 12;
         final List<String> words = createListOfWords();
 
-        System.out.println(countWords(words, wordLength));
+        System.out.println(countWords(words, WORD_LENGTH));
     }
 
     private static List<String> createListOfWords() {
