@@ -11,7 +11,7 @@ import static java.util.Collections.nCopies;
  * Switch to a larger document (such as War and Peace) if you have a fast computer.
  */
 public class Exercise3 {
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         final int WORD_LENGTH = 12;
         final List<String> words = createListOfWords();
 
