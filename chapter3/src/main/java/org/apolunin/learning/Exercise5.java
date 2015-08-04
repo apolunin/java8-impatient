@@ -116,9 +116,10 @@ public class Exercise5 extends Application {
 
         return outputPath;
     }
+
+    @FunctionalInterface
+    private interface ColorTransformer {
+        Color apply(int x, int y, Color colorAtXY);
+    }
 }
 
-@FunctionalInterface
-interface ColorTransformer {
-    Color apply(int x, int y, Color colorAtXY);
-}
