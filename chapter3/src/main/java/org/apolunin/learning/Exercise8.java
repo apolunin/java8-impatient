@@ -31,7 +31,7 @@ public class Exercise8 extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(final Stage primaryStage) throws Exception {
         final Path inputPath = getInputPath();
         final Path outputPath = getOutputPath();
 
