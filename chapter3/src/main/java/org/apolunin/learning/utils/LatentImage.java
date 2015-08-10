@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.UnaryOperator;
 
 public class LatentImage {
-    private Image in;
+    private final Image in;
 
     private List<ColorTransformer> pendingOperations = new ArrayList<>();
 
