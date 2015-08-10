@@ -46,6 +46,16 @@ public interface ImageUtils {
         return out;
     }
 
+    static ColorTransformer createTransformer(final int width, final int height,
+            final int thickness, final Color frameColor) {
+
+        return (x, y, color) ->
+                (x >= thickness) &&
+                        (x <= width - thickness - 1) &&
+                        (y >= thickness) &&
+                        (y <= height - thickness - 1) ? color : frameColor;
+    }
+
     static Path getInputPath() {
         final Path inputPath = Paths.get(System.getProperty(INPUT_PATH_PROPERTY));
 

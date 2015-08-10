@@ -5,6 +5,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.apolunin.learning.utils.ColorTransformer;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
@@ -12,20 +13,22 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.function.UnaryOperator;
 
 import static org.apolunin.learning.utils.ImageUtils.*;
 
 /*
- * ###############################################################################
+ * ############################################################################################################
  * Task description
- * ###############################################################################
+ * ############################################################################################################
  *
- * Generalize Exercise 5 by writing a static method that yields a ColorTransformer
- * that adds a frame of arbitrary thickness and color to an image.
+ * Implement static methods that can compose two ColorTransformer objects, and a static method that turns
+ * a UnaryOperator<Color> into a ColorTransformer that ignores the x- and y-coordinates. Then use these methods
+ * to add a gray frame to a brightened image. (See Exercise 5 for the gray frame.)
  *
- * ###############################################################################
+ * ############################################################################################################
  */
-public class Exercise8 extends Application {
+public class Exercise11 extends Application {
     public static void main(final String[] args) {
         Application.launch(args);
     }
@@ -48,7 +51,8 @@ public class Exercise8 extends Application {
                 final int height = (int) originalImage.getHeight();
 
                 final Image transformedImage = transform(originalImage,
-                        createTransformer(width, height, 30, Color.RED));
+                        compose(wrap(Color::brighter),
+                                createTransformer(width, height, 10, Color.GRAY)));
 
                 try {
                     ImageIO.write(SwingFXUtils.fromFXImage(transformedImage, null),
@@ -60,6 +64,14 @@ public class Exercise8 extends Application {
         }
 
         System.exit(0);
+    }
+
+    public static ColorTransformer compose(final ColorTransformer before, final ColorTransformer after) {
+        return (x, y, color) -> after.apply(x, y, before.apply(x, y, color));
+    }
+
+    public static ColorTransformer wrap(final UnaryOperator<Color> op) {
+        return (x, y, color) -> op.apply(color);
     }
 }
 
