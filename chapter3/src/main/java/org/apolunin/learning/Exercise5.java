@@ -3,7 +3,6 @@ package org.apolunin.learning;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -13,6 +12,8 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import static org.apolunin.learning.utils.ImageUtils.*;
 
 /*
  * #################################################################################################################
@@ -66,60 +67,6 @@ public class Exercise5 extends Application {
         }
 
         System.exit(0);
-    }
-
-    private static Image transform(final Image in, final ColorTransformer transformer) {
-        final int width = (int) in.getWidth();
-        final int height = (int) in.getHeight();
-
-        final WritableImage out = new WritableImage(width, height);
-
-        for (int x = 0; x < width; ++x) {
-            for (int y = 0; y < height; ++y) {
-                out.getPixelWriter().setColor(x, y,
-                        transformer.apply(x, y, in.getPixelReader().getColor(x, y)));
-            }
-        }
-
-        return out;
-    }
-
-    private static Path getInputPath() {
-        final String inputPathPropertyName = "image.input.dir";
-        final Path inputPath = Paths.get(System.getProperty(inputPathPropertyName));
-
-        if (Files.notExists(inputPath)) {
-            System.out.println("input path doesn't exist: " + inputPath);
-            System.exit(-1);
-        }
-
-        if (!Files.isDirectory(inputPath)) {
-            System.out.println(inputPath + " is not a directory");
-            System.exit(-1);
-        }
-
-        return inputPath;
-    }
-
-    private static Path getOutputPath() throws IOException {
-        final String outputPathPropertyName = "image.output.dir";
-        final Path outputPath = Paths.get(System.getProperty(outputPathPropertyName));
-
-        if (Files.notExists(outputPath)) {
-            Files.createDirectory(outputPath);
-        }
-
-        if (!Files.isDirectory(outputPath)) {
-            System.out.println(outputPath + " is not a directory");
-            System.exit(-1);
-        }
-
-        return outputPath;
-    }
-
-    @FunctionalInterface
-    private interface ColorTransformer {
-        Color apply(int x, int y, Color colorAtXY);
     }
 }
 
