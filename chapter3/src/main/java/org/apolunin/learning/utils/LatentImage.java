@@ -11,7 +11,7 @@ import java.util.function.UnaryOperator;
 public class LatentImage {
     private final Image in;
 
-    private List<ColorTransformer> pendingOperations = new ArrayList<>();
+    private final List<ColorTransformer> pendingOperations = new ArrayList<>();
 
     private LatentImage(final Image in) {
         this.in = in;
