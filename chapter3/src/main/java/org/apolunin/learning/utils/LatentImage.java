@@ -1,11 +1,15 @@
 package org.apolunin.learning.utils;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.UnaryOperator;
 
 public class LatentImage {
@@ -105,7 +109,7 @@ public class LatentImage {
         return this;
     }
 
-    private double truncateComponent(final double value) {
+    private static double truncateComponent(final double value) {
         return Math.min(Math.max(0, value), 1);
     }
 
@@ -139,6 +143,53 @@ public class LatentImage {
                 }
 
                 out.getPixelWriter().setColor(x, y, color);
+            }
+        }
+
+        return out;
+    }
+
+    public Image toImageParallel() {
+        final int width = (int) in.getWidth();
+        final int height = (int) in.getHeight();
+        final int coresCount = Runtime.getRuntime().availableProcessors();
+
+        final Color[][] pixels = new Color[width][height];
+
+        final ExecutorService pool = Executors.newCachedThreadPool();
+        final PixelReader reader = in.getPixelReader();
+
+        for (int i = 0; i < coresCount; ++i) {
+            final int fromY = i * height / coresCount;
+            final int toY = (i + 1) * height / coresCount;
+
+            pool.submit(() -> {
+                for (int x = 0; x < width; ++x) {
+                    for (int y = fromY; y < toY; ++y) {
+                        Color color = reader.getColor(x, y);
+
+                        for (final ColorTransformer op : pendingOperations) {
+                            color = op.apply(x, y, color);
+                        }
+
+                        pixels[x][y] = color;
+                    }
+                }
+            });
+        }
+
+        try {
+            pool.shutdown();
+            pool.awaitTermination(1, TimeUnit.HOURS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        final WritableImage out = new WritableImage(width, height);
+
+        for (int i = 0; i < width; ++i) {
+            for (int j = 0; j < height; ++j) {
+                out.getPixelWriter().setColor(i, j, pixels[i][j]);
             }
         }
 
