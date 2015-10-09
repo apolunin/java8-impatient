@@ -34,12 +34,12 @@ public class Exercise17 {
     }
 
     private static void doInParallelAsync(final Runnable first,
-            final Runnable second, final Consumer<Throwable> handler) {
+            final Runnable second, final Consumer<? super Throwable> handler) {
         doAsync(first, handler);
         doAsync(second, handler);
     }
 
-    private static void doAsync(final Runnable task, final Consumer<Throwable> handler) {
+    private static void doAsync(final Runnable task, final Consumer<? super Throwable> handler) {
         final Thread thread = new Thread() {
             @Override
             public void run() {

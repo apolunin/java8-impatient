@@ -23,8 +23,8 @@ public class Exercise16 {
         });
     }
 
-    private static <T> void doInOrderAsync(final Supplier<T> first,
-            final BiConsumer<T, Throwable> second) {
+    private static <T> void doInOrderAsync(final Supplier<? extends T> first,
+            final BiConsumer<? super T, ? super Throwable> second) {
 
         final Thread thread = new Thread() {
             @Override
