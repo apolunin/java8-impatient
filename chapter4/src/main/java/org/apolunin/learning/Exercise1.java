@@ -8,6 +8,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/*
+ * ##########################################################################################################
+ * Task description
+ * ##########################################################################################################
+ *
+ * Write a program with a text field and a label. As with the Hello, JavaFX program, the label should have
+ * the string Hello, FX in a 100 point font. Initialize the text field with the same string. Update the label
+ * as the user edits the text field.
+ *
+ * ##########################################################################################################
+ */
 public class Exercise1 extends Application {
 
     @Override
